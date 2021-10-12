@@ -1,13 +1,3 @@
-# Additionals
-variable "aaa_prefix_aaa" {
-  type = string
-}
-
-# Provider
-variable "aaa_region_aaa" {
-  type = string
-}
-
 # VPC
 variable "aaa_vpc_aaa" {
   type = string
