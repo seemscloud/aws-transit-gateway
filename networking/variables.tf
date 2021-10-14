@@ -15,6 +15,11 @@ variable "bbb_vpc_cidr_aaa" {
   type = string
 }
 
+# Transit Gateway
+variable "aaa_transit_gateway_aaa" {
+  type = string
+}
+
 # Subnets
 variable "aaa_subnet_aaa" {
   type = string
@@ -22,6 +27,14 @@ variable "aaa_subnet_aaa" {
 
 variable "aaa_subnet_cidr_aaa" {
   type = string
+}
+
+variable "aaa_subnet_cidr_newbits_aaa" {
+  type = number
+}
+
+variable "aaa_subnet_cidr_netnum_aaa" {
+  type = number
 }
 
 variable "aaa_subnet_azs_aaa" {
@@ -34,6 +47,14 @@ variable "bbb_subnet_aaa" {
 
 variable "bbb_subnet_cidr_aaa" {
   type = string
+}
+
+variable "bbb_subnet_cidr_newbits_aaa" {
+  type = number
+}
+
+variable "bbb_subnet_cidr_netnum_aaa" {
+  type = number
 }
 
 variable "bbb_subnet_azs_aaa" {
