@@ -25,5 +25,20 @@ resource "aws_subnet" "bbb_subnet_aaa" {
   }
 
   depends_on = [
-    aws_vpc.aaa_vpc_aaa]
+    aws_vpc.bbb_vpc_aaa]
+}
+
+resource "aws_subnet" "ccc_vpc_aaa" {
+  vpc_id = aws_vpc.ccc_vpc_aaa.id
+  cidr_block = cidrsubnet(var.ccc_subnet_cidr_aaa, var.ccc_subnet_cidr_newbits_aaa, var.ccc_subnet_cidr_netnum_aaa + count.index)
+
+  count = length(var.ccc_subnet_azs_aaa)
+  availability_zone = var.ccc_subnet_azs_aaa[count.index]
+
+  tags = {
+    Name = "${var.ccc_subnet_aaa}-${count.index}"
+  }
+
+  depends_on = [
+    aws_vpc.ccc_vpc_aaa]
 }
