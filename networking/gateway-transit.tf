@@ -20,9 +20,6 @@ resource "aws_ec2_transit_gateway_vpc_attachment" "aaa-aaa_transit_gateway_aaa-b
   tags = {
     Name = "${var.aaa_vpc_aaa}-${var.aaa_transit_gateway_aaa}-${var.bbb_vpc_aaa}"
   }
-
-  depends_on = [
-    aws_ec2_transit_gateway.aaa_transit_gateway_aaa]
 }
 
 resource "aws_ec2_transit_gateway_vpc_attachment" "bbb-aaa_transit_gateway_aaa-aaa" {
@@ -36,47 +33,52 @@ resource "aws_ec2_transit_gateway_vpc_attachment" "bbb-aaa_transit_gateway_aaa-a
   tags = {
     Name = "${var.bbb_vpc_aaa}-${var.aaa_transit_gateway_aaa}-${var.aaa_vpc_aaa}"
   }
-
-  depends_on = [
-    aws_ec2_transit_gateway.aaa_transit_gateway_aaa]
 }
 
-resource "aws_ec2_transit_gateway_route_table" "aaa_transit_gateway_aaa" {
+resource "aws_ec2_transit_gateway_route" "aaa_vpc_aaa" {
+  destination_cidr_block         = var.bbb_vpc_cidr_aaa
+  transit_gateway_attachment_id  = aws_ec2_transit_gateway_vpc_attachment.aaa-aaa_transit_gateway_aaa-bbb.id
+  transit_gateway_route_table_id = aws_ec2_transit_gateway_route_table.aaa-aaa_transit_gateway_aaa-bbb.id
+}
+
+resource "aws_ec2_transit_gateway_route_table" "bbb-aaa_transit_gateway_aaa-aaa" {
   transit_gateway_id = aws_ec2_transit_gateway.aaa_transit_gateway_aaa.id
 
   tags = {
-    Name = var.aaa_transit_gateway_aaa
+    Name = "${var.aaa_transit_gateway_aaa}-${var.aaa_vpc_aaa}"
+  }
+}
+
+resource "aws_ec2_transit_gateway_route" "bbb_vpc_aaa" {
+  destination_cidr_block         = var.aaa_vpc_cidr_aaa
+  transit_gateway_attachment_id  = aws_ec2_transit_gateway_vpc_attachment.bbb-aaa_transit_gateway_aaa-aaa.id
+  transit_gateway_route_table_id = aws_ec2_transit_gateway_route_table.bbb-aaa_transit_gateway_aaa-aaa.id
+}
+
+resource "aws_ec2_transit_gateway_route_table" "aaa-aaa_transit_gateway_aaa-bbb" {
+  transit_gateway_id = aws_ec2_transit_gateway.aaa_transit_gateway_aaa.id
+
+  tags = {
+    Name = "${var.aaa_transit_gateway_aaa}-${var.bbb_vpc_aaa}"
   }
 }
 
 resource "aws_ec2_transit_gateway_route_table_association" "aaa-aaa_transit_gateway_aaa-bbb" {
   transit_gateway_attachment_id = aws_ec2_transit_gateway_vpc_attachment.aaa-aaa_transit_gateway_aaa-bbb.id
-  transit_gateway_route_table_id = aws_ec2_transit_gateway_route_table.aaa_transit_gateway_aaa.id
-
-  depends_on = [
-    aws_ec2_transit_gateway_route_table.aaa_transit_gateway_aaa]
+  transit_gateway_route_table_id = aws_ec2_transit_gateway_route_table.aaa-aaa_transit_gateway_aaa-bbb.id
 }
 
-resource "aws_ec2_transit_gateway_route_table_propagation" "aaa-aaa_transit_gateway_aaa-bbb" {
-  transit_gateway_attachment_id = aws_ec2_transit_gateway_vpc_attachment.aaa-aaa_transit_gateway_aaa-bbb.id
-  transit_gateway_route_table_id = aws_ec2_transit_gateway_route_table.aaa_transit_gateway_aaa.id
-
-  depends_on = [
-    aws_ec2_transit_gateway_route_table.aaa_transit_gateway_aaa]
-}
+//resource "aws_ec2_transit_gateway_route_table_propagation" "aaa-aaa_transit_gateway_aaa-bbb" {
+//  transit_gateway_attachment_id = aws_ec2_transit_gateway_vpc_attachment.aaa-aaa_transit_gateway_aaa-bbb.id
+//  transit_gateway_route_table_id = aws_ec2_transit_gateway_route_table.aaa-aaa_transit_gateway_aaa-bbb.id
+//}
 
 resource "aws_ec2_transit_gateway_route_table_association" "bbb-aaa_transit_gateway_aaa-aaa" {
   transit_gateway_attachment_id = aws_ec2_transit_gateway_vpc_attachment.bbb-aaa_transit_gateway_aaa-aaa.id
-  transit_gateway_route_table_id = aws_ec2_transit_gateway_route_table.aaa_transit_gateway_aaa.id
-
-  depends_on = [
-    aws_ec2_transit_gateway_route_table.aaa_transit_gateway_aaa]
+  transit_gateway_route_table_id = aws_ec2_transit_gateway_route_table.bbb-aaa_transit_gateway_aaa-aaa.id
 }
 
-resource "aws_ec2_transit_gateway_route_table_propagation" "bbb-aaa_transit_gateway_aaa-aaa" {
-  transit_gateway_attachment_id = aws_ec2_transit_gateway_vpc_attachment.bbb-aaa_transit_gateway_aaa-aaa.id
-  transit_gateway_route_table_id = aws_ec2_transit_gateway_route_table.aaa_transit_gateway_aaa.id
-
-  depends_on = [
-    aws_ec2_transit_gateway_route_table.aaa_transit_gateway_aaa]
-}
+//resource "aws_ec2_transit_gateway_route_table_propagation" "bbb-aaa_transit_gateway_aaa-aaa" {
+//  transit_gateway_attachment_id = aws_ec2_transit_gateway_vpc_attachment.bbb-aaa_transit_gateway_aaa-aaa.id
+//  transit_gateway_route_table_id = aws_ec2_transit_gateway_route_table.bbb-aaa_transit_gateway_aaa-aaa.id
+//}
