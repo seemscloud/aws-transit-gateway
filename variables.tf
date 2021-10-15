@@ -70,3 +70,8 @@ variable "bbb_subnet_cidr_netnum_aaa" {
 variable "bbb_subnet_azs_aaa" {
   type = list(string)
 }
+
+# EC2 Instances
+variable "aaa_ec2_aaa" {
+  type = string
+}

@@ -15,7 +15,7 @@ aaa_transit_gateway_aaa = "000"
 
 # Subnets
 aaa_subnet_aaa = "foo-aaa"
-aaa_subnet_cidr_aaa = "10.100.0.0/24" # 10.100.0.0/28, 10.100.0.16/28, 10.100.0.32/28
+aaa_subnet_cidr_aaa = "10.100.0.0/24" # 10.100.0.0/28, 10.100.0.64/28, 10.100.0.128/28
 aaa_subnet_cidr_newbits_aaa = 2
 aaa_subnet_cidr_netnum_aaa = 0
 aaa_subnet_azs_aaa = [
@@ -24,10 +24,13 @@ aaa_subnet_azs_aaa = [
   "eu-central-1c"]
 
 bbb_subnet_aaa = "foo-aaa"
-bbb_subnet_cidr_aaa = "10.200.0.0/24" # 10.200.0.0/28, 10.200.0.16/28, 10.200.0.32/28
+bbb_subnet_cidr_aaa = "10.200.0.0/24" # 10.200.0.0/28, 10.200.0.64/28, 10.200.0.128/28
 bbb_subnet_cidr_newbits_aaa = 2
 bbb_subnet_cidr_netnum_aaa = 0
 bbb_subnet_azs_aaa = [
   "eu-central-1a",
   "eu-central-1b",
   "eu-central-1c"]
+
+# EC2 Instances
+aaa_ec2_aaa = "foo-aaa"
