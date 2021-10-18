@@ -14,8 +14,11 @@ locals {
   aaa_subnet_aaa = "${local.aaa_vpc_aaa}-${var.aaa_subnet_aaa}"
   bbb_subnet_aaa = "${local.bbb_vpc_aaa}-${var.bbb_subnet_aaa}"
   ccc_subnet_aaa = "${local.ccc_vpc_aaa}-${var.ccc_subnet_aaa}"
+  ccc_subnet_bbb = "${local.ccc_vpc_aaa}-${var.ccc_subnet_bbb}"
 
   # EC2 Instances
-  aaa_ec2_aaa = "${local.bbb_vpc_aaa}-${var.aaa_ec2_aaa}"
+  aaa_ec2_aaa = "${local.aaa_vpc_aaa}-${var.aaa_ec2_aaa}"
   bbb_ec2_aaa = "${local.bbb_vpc_aaa}-${var.bbb_ec2_aaa}"
+  ccc_ec2_aaa = "${local.ccc_vpc_aaa}-${var.ccc_ec2_aaa}"
+  ccc_ec2_bbb = "${local.ccc_vpc_aaa}-${var.ccc_ec2_bbb}"
 }

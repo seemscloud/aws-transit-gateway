@@ -89,11 +89,39 @@ variable "ccc_subnet_azs_aaa" {
   type = list(string)
 }
 
+variable "ccc_subnet_bbb" {
+  type = string
+}
+
+variable "ccc_subnet_cidr_bbb" {
+  type = string
+}
+
+variable "ccc_subnet_cidr_newbits_bbb" {
+  type = number
+}
+
+variable "ccc_subnet_cidr_netnum_bbb" {
+  type = number
+}
+
+variable "ccc_subnet_azs_bbb" {
+  type = list(string)
+}
+
 # EC2 Instances
 variable "aaa_ec2_aaa" {
   type = string
 }
 
 variable "bbb_ec2_aaa" {
+  type = string
+}
+
+variable "ccc_ec2_aaa" {
+  type = string
+}
+
+variable "ccc_ec2_bbb" {
   type = string
 }
