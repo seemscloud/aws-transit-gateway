@@ -124,7 +124,47 @@ variable "aaa_ec2_aaa" {
   type = string
 }
 
+variable "aaa_ec2_count_per_az_aaa" {
+  type = number
+}
+
+variable "aaa_ec2_type_aaa" {
+  type = string
+}
+
+variable "aaa_ec2_rbd_type_aaa" {
+  type = string
+}
+
+variable "aaa_ec2_rbd_size_aaa" {
+  type = string
+}
+
+variable "aaa_ec2_ami_aaa" {
+  type = string
+}
+
 variable "bbb_ec2_aaa" {
+  type = string
+}
+
+variable "bbb_ec2_count_per_az_aaa" {
+  type = number
+}
+
+variable "bbb_ec2_type_aaa" {
+  type = string
+}
+
+variable "bbb_ec2_rbd_type_aaa" {
+  type = string
+}
+
+variable "bbb_ec2_rbd_size_aaa" {
+  type = string
+}
+
+variable "bbb_ec2_ami_aaa" {
   type = string
 }
 
@@ -149,5 +189,21 @@ variable "ccc_ec2_ami_aaa" {
 }
 
 variable "ccc_ec2_bbb" {
+  type = string
+}
+
+variable "ccc_ec2_type_bbb" {
+  type = string
+}
+
+variable "ccc_ec2_rbd_type_bbb" {
+  type = string
+}
+
+variable "ccc_ec2_rbd_size_bbb" {
+  type = string
+}
+
+variable "ccc_ec2_ami_bbb" {
   type = string
 }

@@ -40,8 +40,12 @@ module "networking" {
   ccc_subnet_azs_bbb          = var.ccc_subnet_azs_bbb
 
   # EC2 Instances
-  aaa_ec2_aaa = local.aaa_ec2_aaa
-  bbb_ec2_aaa = local.bbb_ec2_aaa
+  aaa_ec2_aaa              = local.aaa_ec2_aaa
+  aaa_ec2_count_per_az_aaa = var.aaa_ec2_count_per_az_aaa
+
+  bbb_ec2_aaa              = local.bbb_ec2_aaa
+  bbb_ec2_count_per_az_aaa = var.bbb_ec2_count_per_az_aaa
+
   ccc_ec2_aaa = local.ccc_ec2_aaa
   ccc_ec2_bbb = local.ccc_ec2_bbb
 }

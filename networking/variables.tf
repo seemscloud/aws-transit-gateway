@@ -114,8 +114,16 @@ variable "aaa_ec2_aaa" {
   type = string
 }
 
+variable "aaa_ec2_count_per_az_aaa" {
+  type = number
+}
+
 variable "bbb_ec2_aaa" {
   type = string
+}
+
+variable "bbb_ec2_count_per_az_aaa" {
+  type = number
 }
 
 variable "ccc_ec2_aaa" {
