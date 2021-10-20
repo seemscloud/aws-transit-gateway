@@ -1,5 +1,9 @@
 # AWS Transit Gateway
 
+## Architecture
+
+![Architecture](docs/architecture.png)
+
 ## Access Key
 
 ```bash
