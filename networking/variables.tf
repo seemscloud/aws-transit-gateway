@@ -49,6 +49,26 @@ variable "aaa_subnet_azs_aaa" {
   type = list(string)
 }
 
+variable "aaa_subnet_bbb" {
+  type = string
+}
+
+variable "aaa_subnet_cidr_bbb" {
+  type = string
+}
+
+variable "aaa_subnet_cidr_newbits_bbb" {
+  type = number
+}
+
+variable "aaa_subnet_cidr_netnum_bbb" {
+  type = number
+}
+
+variable "aaa_subnet_azs_bbb" {
+  type = list(string)
+}
+
 variable "bbb_subnet_aaa" {
   type = string
 }
@@ -66,6 +86,26 @@ variable "bbb_subnet_cidr_netnum_aaa" {
 }
 
 variable "bbb_subnet_azs_aaa" {
+  type = list(string)
+}
+
+variable "bbb_subnet_bbb" {
+  type = string
+}
+
+variable "bbb_subnet_cidr_bbb" {
+  type = string
+}
+
+variable "bbb_subnet_cidr_newbits_bbb" {
+  type = number
+}
+
+variable "bbb_subnet_cidr_netnum_bbb" {
+  type = number
+}
+
+variable "bbb_subnet_azs_bbb" {
   type = list(string)
 }
 

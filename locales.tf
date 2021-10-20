@@ -12,7 +12,11 @@ locals {
 
   # Subnets
   aaa_subnet_aaa = "${local.aaa_vpc_aaa}-${var.aaa_subnet_aaa}"
+  aaa_subnet_bbb = "${local.aaa_vpc_aaa}-${var.aaa_subnet_bbb}"
+
   bbb_subnet_aaa = "${local.bbb_vpc_aaa}-${var.bbb_subnet_aaa}"
+  bbb_subnet_bbb = "${local.bbb_vpc_aaa}-${var.bbb_subnet_bbb}"
+
   ccc_subnet_aaa = "${local.ccc_vpc_aaa}-${var.ccc_subnet_aaa}"
   ccc_subnet_bbb = "${local.ccc_vpc_aaa}-${var.ccc_subnet_bbb}"
 

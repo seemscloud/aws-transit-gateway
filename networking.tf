@@ -21,11 +21,23 @@ module "networking" {
   aaa_subnet_cidr_netnum_aaa  = var.aaa_subnet_cidr_netnum_aaa
   aaa_subnet_azs_aaa          = var.aaa_subnet_azs_aaa
 
+  aaa_subnet_bbb              = local.aaa_subnet_bbb
+  aaa_subnet_cidr_bbb         = var.aaa_subnet_cidr_bbb
+  aaa_subnet_cidr_newbits_bbb = var.aaa_subnet_cidr_newbits_bbb
+  aaa_subnet_cidr_netnum_bbb  = var.aaa_subnet_cidr_netnum_bbb
+  aaa_subnet_azs_bbb          = var.aaa_subnet_azs_bbb
+
   bbb_subnet_aaa              = local.bbb_subnet_aaa
   bbb_subnet_cidr_aaa         = var.bbb_subnet_cidr_aaa
   bbb_subnet_cidr_newbits_aaa = var.bbb_subnet_cidr_newbits_aaa
   bbb_subnet_cidr_netnum_aaa  = var.bbb_subnet_cidr_netnum_aaa
   bbb_subnet_azs_aaa          = var.bbb_subnet_azs_aaa
+
+  bbb_subnet_bbb              = local.bbb_subnet_bbb
+  bbb_subnet_cidr_bbb         = var.bbb_subnet_cidr_bbb
+  bbb_subnet_cidr_newbits_bbb = var.bbb_subnet_cidr_newbits_bbb
+  bbb_subnet_cidr_netnum_bbb  = var.bbb_subnet_cidr_netnum_bbb
+  bbb_subnet_azs_bbb          = var.bbb_subnet_azs_bbb
 
   ccc_subnet_aaa              = local.ccc_subnet_aaa
   ccc_subnet_cidr_aaa         = var.ccc_subnet_cidr_aaa

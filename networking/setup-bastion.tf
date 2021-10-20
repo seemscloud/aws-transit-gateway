@@ -1,3 +1,24 @@
+resource "aws_eip" "ccc_subnet_aaa-nat" {
+  vpc = true
+
+  count = length(var.ccc_subnet_azs_aaa)
+
+  tags = {
+    Name = "${var.ccc_subnet_aaa}-${count.index}-nat"
+  }
+}
+
+resource "aws_nat_gateway" "ccc_subnet_aaa" {
+  allocation_id = aws_eip.ccc_subnet_aaa-nat[count.index].id
+  subnet_id     = aws_subnet.ccc_subnet_aaa[count.index].id
+
+  count = length(var.ccc_subnet_azs_aaa)
+
+  tags = {
+    Name = "${var.ccc_subnet_aaa}-${count.index}-nat"
+  }
+}
+
 resource "aws_eip" "ccc_ec2_aaa" {
   vpc = true
 
@@ -22,7 +43,7 @@ resource "aws_network_interface" "ccc_ec2_aaa" {
   }
 }
 
-resource "aws_route_table" "ccc_ec2_aaa" {
+resource "aws_route_table" "ccc_subnet_aaa" {
   vpc_id = aws_vpc.ccc_vpc_aaa.id
 
   route = [
@@ -73,15 +94,21 @@ resource "aws_route_table" "ccc_ec2_aaa" {
     }
   ]
 
+  lifecycle {
+    ignore_changes = [
+      route,
+    ]
+  }
+
   tags = {
-    Name = var.ccc_ec2_aaa
+    Name = var.ccc_subnet_aaa
   }
 }
 
-resource "aws_route_table_association" "ccc_ec2_aaa" {
+resource "aws_route_table_association" "ccc_subnet_aaa" {
   subnet_id      = aws_subnet.ccc_subnet_aaa[count.index].id
   count          = length(var.ccc_subnet_azs_aaa)
-  route_table_id = aws_route_table.ccc_ec2_aaa.id
+  route_table_id = aws_route_table.ccc_subnet_aaa.id
 }
 
 resource "aws_security_group" "ccc_ec2_aaa" {
@@ -106,7 +133,7 @@ resource "aws_security_group" "ccc_ec2_aaa" {
   }
 
   tags = {
-    Name = var.ccc_vpc_aaa
+    Name = var.ccc_ec2_aaa
   }
 
   depends_on = [

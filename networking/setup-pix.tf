@@ -12,8 +12,10 @@ resource "aws_network_interface" "aaa_ec2_aaa" {
   }
 }
 
-resource "aws_route_table" "aaa_ec2_aaa" {
+resource "aws_route_table" "aaa_subnet_aaa" {
   vpc_id = aws_vpc.aaa_vpc_aaa.id
+
+  count = length(var.aaa_subnet_azs_aaa)
 
   route = [
     {
@@ -30,18 +32,39 @@ resource "aws_route_table" "aaa_ec2_aaa" {
       transit_gateway_id         = aws_ec2_transit_gateway.aaa_tgw_aaa.id
       vpc_endpoint_id            = ""
       vpc_peering_connection_id  = ""
+    },
+    {
+      cidr_block                 = "0.0.0.0/0"
+      gateway_id                 = aws_nat_gateway.aaa_subnet_bbb[count.index].id
+      carrier_gateway_id         = ""
+      destination_prefix_list_id = ""
+      egress_only_gateway_id     = ""
+      instance_id                = ""
+      ipv6_cidr_block            = ""
+      local_gateway_id           = ""
+      nat_gateway_id             = ""
+      network_interface_id       = ""
+      transit_gateway_id         = ""
+      vpc_endpoint_id            = ""
+      vpc_peering_connection_id  = ""
     }
   ]
 
+  lifecycle {
+    ignore_changes = [
+      route,
+    ]
+  }
+
   tags = {
-    Name = var.aaa_ec2_aaa
+    Name = "${var.aaa_subnet_aaa}-${count.index}"
   }
 }
 
-resource "aws_route_table_association" "aaa_ec2_aaa" {
+resource "aws_route_table_association" "aaa_subnet_aaa" {
   subnet_id      = aws_subnet.aaa_subnet_aaa[count.index].id
   count          = length(var.aaa_subnet_azs_aaa)
-  route_table_id = aws_route_table.aaa_ec2_aaa.id
+  route_table_id = aws_route_table.aaa_subnet_aaa[count.index].id
 }
 
 resource "aws_security_group" "aaa_ec2_aaa" {
@@ -66,10 +89,65 @@ resource "aws_security_group" "aaa_ec2_aaa" {
   }
 
   tags = {
-    Name = var.aaa_vpc_aaa
+    Name = var.aaa_ec2_aaa
   }
 
   depends_on = [
-    aws_vpc.aaa_vpc_aaa
+    aws_vpc.bbb_vpc_aaa
   ]
+}
+
+resource "aws_eip" "aaa_subnet_bbb-nat" {
+  vpc = true
+
+  count = length(var.aaa_subnet_azs_bbb)
+
+  tags = {
+    Name = "${var.aaa_subnet_bbb}-${count.index}-nat"
+  }
+}
+
+resource "aws_nat_gateway" "aaa_subnet_bbb" {
+  allocation_id = aws_eip.aaa_subnet_bbb-nat[count.index].id
+  subnet_id     = aws_subnet.aaa_subnet_bbb[count.index].id
+
+  count = length(var.aaa_subnet_azs_bbb)
+
+  tags = {
+    Name = "${var.aaa_subnet_bbb}-${count.index}-nat"
+  }
+}
+
+resource "aws_route_table" "aaa_subnet_bbb" {
+  vpc_id = aws_vpc.aaa_vpc_aaa.id
+
+  count = length(var.aaa_subnet_azs_bbb)
+
+  route = [
+    {
+      cidr_block                 = "0.0.0.0/0"
+      gateway_id                 = aws_internet_gateway.aaa_vpc_aaa.id
+      carrier_gateway_id         = ""
+      destination_prefix_list_id = ""
+      egress_only_gateway_id     = ""
+      instance_id                = ""
+      ipv6_cidr_block            = ""
+      local_gateway_id           = ""
+      nat_gateway_id             = ""
+      network_interface_id       = ""
+      transit_gateway_id         = ""
+      vpc_endpoint_id            = ""
+      vpc_peering_connection_id  = ""
+    }
+  ]
+
+  tags = {
+    Name = "${var.aaa_subnet_bbb}-${count.index}"
+  }
+}
+
+resource "aws_route_table_association" "aaa_subnet_bbb" {
+  subnet_id      = aws_subnet.aaa_subnet_bbb[count.index].id
+  count          = length(var.aaa_subnet_azs_bbb)
+  route_table_id = aws_route_table.aaa_subnet_bbb[count.index].id
 }

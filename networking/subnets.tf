@@ -14,6 +14,22 @@ resource "aws_subnet" "aaa_subnet_aaa" {
   ]
 }
 
+resource "aws_subnet" "aaa_subnet_bbb" {
+  vpc_id     = aws_vpc.aaa_vpc_aaa.id
+  cidr_block = cidrsubnet(var.aaa_subnet_cidr_bbb, var.aaa_subnet_cidr_newbits_bbb, var.aaa_subnet_cidr_netnum_bbb + count.index)
+
+  count             = length(var.aaa_subnet_azs_bbb)
+  availability_zone = var.aaa_subnet_azs_bbb[count.index]
+
+  tags = {
+    Name = "${var.aaa_subnet_bbb}-${count.index}"
+  }
+
+  depends_on = [
+    aws_vpc.aaa_vpc_aaa
+  ]
+}
+
 resource "aws_subnet" "bbb_subnet_aaa" {
   vpc_id     = aws_vpc.bbb_vpc_aaa.id
   cidr_block = cidrsubnet(var.bbb_subnet_cidr_aaa, var.bbb_subnet_cidr_newbits_aaa, var.bbb_subnet_cidr_netnum_aaa + count.index)
@@ -23,6 +39,22 @@ resource "aws_subnet" "bbb_subnet_aaa" {
 
   tags = {
     Name = "${var.bbb_subnet_aaa}-${count.index}"
+  }
+
+  depends_on = [
+    aws_vpc.bbb_vpc_aaa
+  ]
+}
+
+resource "aws_subnet" "bbb_subnet_bbb" {
+  vpc_id     = aws_vpc.bbb_vpc_aaa.id
+  cidr_block = cidrsubnet(var.bbb_subnet_cidr_bbb, var.bbb_subnet_cidr_newbits_bbb, var.bbb_subnet_cidr_netnum_bbb + count.index)
+
+  count             = length(var.bbb_subnet_azs_bbb)
+  availability_zone = var.bbb_subnet_azs_bbb[count.index]
+
+  tags = {
+    Name = "${var.bbb_subnet_bbb}-${count.index}"
   }
 
   depends_on = [

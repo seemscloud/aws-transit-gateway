@@ -18,9 +18,9 @@ ccc_vpc_cidr_aaa = "10.255.255.0/24"
 aaa_tgw_aaa = "000"
 
 # Subnets
-aaa_subnet_aaa              = "pix"
-aaa_subnet_cidr_aaa         = "10.100.0.0/24" # 10.100.0.0/26, 10.100.0.64/26, 10.100.0.128/26
-aaa_subnet_cidr_newbits_aaa = 2
+aaa_subnet_aaa              = "pix-private"
+aaa_subnet_cidr_aaa         = "10.100.0.0/16" # 10.100.10.0/24, 10.100.11.0/24, 10.100.12.0/24
+aaa_subnet_cidr_newbits_aaa = 8
 aaa_subnet_cidr_netnum_aaa  = 0
 aaa_subnet_azs_aaa          = [
   "eu-central-1a",
@@ -28,9 +28,19 @@ aaa_subnet_azs_aaa          = [
   "eu-central-1c"
 ]
 
-bbb_subnet_aaa              = "het"
-bbb_subnet_cidr_aaa         = "10.200.0.0/24" # 10.200.0.0/26, 10.200.0.64/26, 10.200.0.128/26
-bbb_subnet_cidr_newbits_aaa = 2
+aaa_subnet_bbb              = "pix-public"
+aaa_subnet_cidr_bbb         = "10.100.250.0/24" # 10.100.250.0/28, 10.100.250.16/28, 10.100.250.32/28
+aaa_subnet_cidr_newbits_bbb = 4
+aaa_subnet_cidr_netnum_bbb  = 0
+aaa_subnet_azs_bbb          = [
+  "eu-central-1a",
+  "eu-central-1b",
+  "eu-central-1c"
+]
+
+bbb_subnet_aaa              = "het-private"
+bbb_subnet_cidr_aaa         = "10.200.0.0/16" # 10.200.10.0/24, 10.200.11.0/24, 10.200.12.0/24
+bbb_subnet_cidr_newbits_aaa = 8
 bbb_subnet_cidr_netnum_aaa  = 0
 bbb_subnet_azs_aaa          = [
   "eu-central-1a",
@@ -38,7 +48,17 @@ bbb_subnet_azs_aaa          = [
   "eu-central-1c"
 ]
 
-ccc_subnet_aaa              = "bastion"
+bbb_subnet_bbb              = "het-public"
+bbb_subnet_cidr_bbb         = "10.200.250.0/24" # 10.200.250.0/28, 10.200.250.16/28, 10.200.250.32/28
+bbb_subnet_cidr_newbits_bbb = 4
+bbb_subnet_cidr_netnum_bbb  = 0
+bbb_subnet_azs_bbb          = [
+  "eu-central-1a",
+  "eu-central-1b",
+  "eu-central-1c"
+]
+
+ccc_subnet_aaa              = "bastion-pub"
 ccc_subnet_cidr_aaa         = "10.255.255.0/24" # 10.255.255.0/28, 10.255.255.16/28, 10.255.255.32/28
 ccc_subnet_cidr_newbits_aaa = 4
 ccc_subnet_cidr_netnum_aaa  = 0
@@ -48,8 +68,8 @@ ccc_subnet_azs_aaa          = [
   "eu-central-1c"
 ]
 
-ccc_subnet_bbb              = "jenkins"
-ccc_subnet_cidr_bbb         = "10.255.255.0/24" # 10.255.255.0/28, 10.255.255.16/28, 10.255.255.32/28
+ccc_subnet_bbb              = "jenkins-priv"
+ccc_subnet_cidr_bbb         = "10.255.255.0/24" # 10.255.255.48/28, 10.255.255.64/28, 10.255.255.80/28
 ccc_subnet_cidr_newbits_bbb = 4
 ccc_subnet_cidr_netnum_bbb  = 3
 ccc_subnet_azs_bbb          = [
